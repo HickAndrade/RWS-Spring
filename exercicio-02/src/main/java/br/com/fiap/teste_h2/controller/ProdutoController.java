@@ -24,7 +24,8 @@ public class ProdutoController {
     }
 
     @PostMapping("/cadastrar")
-    public String Cadastrado(Produto produto){
+    public String Cadastrado(Produto produto, Model model){
+        model.addAttribute("prod", produto);
         repository.save(produto);
         return "sucesso";
     }
@@ -32,11 +33,13 @@ public class ProdutoController {
     public String Buscando(){
         return "busca";
     }
+    //aqui em baixo ele vai procurar o codigo informado no GetMapping
+
     @PostMapping("/buscar")
-    public String Cadastrado(int codigo, Model model){
-       Optional<Produto> produto = repository.findById(codigo);
-      model.addAttribute("prod", produto);
-        return "buscar";
+    public String Buscando(int codigo, Model model){
+        Optional<Produto> produt = repository.findById(codigo);
+        model.addAttribute("prod", produt);
+        return "resultado";
     }
 
 

@@ -19,23 +19,27 @@ public class ProdutoController {
     private ProdutoRepository repository;
 
 /**Lista dos produtos cadastrados**/
-  /*  @GetMapping
-    public List<Produto> listar() {
-        return repository.findAll();
-    }*/
+
+
+   @GetMapping("listar")
+    public String listar( Model model) {
+       model.addAttribute("produtos",repository.findAll());
+        return "objeto";
+    }
 
 
 
     /**========================================REGISTER===================================**/
     @GetMapping("cadastrar")
-    public String cadastrar() {
+    public String cadastrar(Produto produto,Model model) {
+        model.addAttribute("prod", produto);
         return "cadastrar";
     }
 
     @PostMapping("cadastrar")
     public String ProcessandoForm(Produto produto){
         repository.save(produto);
-        return "Sucesso";
+        return "redirect:/produto/listar";
     }
 
 

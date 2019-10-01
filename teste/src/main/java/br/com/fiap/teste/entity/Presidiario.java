@@ -10,9 +10,18 @@ public class Presidiario {
     @Id
     @GeneratedValue(generator = "presidiario",strategy = GenerationType.SEQUENCE)
     private int presidiarioId;
+
+    @Column(name ="PR_NOME")
     private String Nome;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="PR_ESCOLARIDADE")
     private Escolaridade escolaridade;
+
+    @Column(name = "PR_SAIDINHA")
     private boolean saidinha;
+
+    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
     private Cela cela;
 
 

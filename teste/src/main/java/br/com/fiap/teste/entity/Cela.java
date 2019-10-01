@@ -11,8 +11,15 @@ public class Cela {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "cela")
     private int celaId;
+
+    @Column(name = "CL_NOME",length = 255,nullable = false)
     private String nome;
+
+    @Column(name = "CL_QUANTIDADE_PRESIDIARIO")
     private int quantidade;
+
+
+    @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "cela",fetch = FetchType.LAZY)
     private List<Presidiario> presidiarios;
 
 
